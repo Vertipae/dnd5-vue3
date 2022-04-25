@@ -61,7 +61,11 @@
               placeholder="Search"
             />
 
-            <button class="btn btn-secondary my-2 my-sm-0" type="submit">
+            <button
+              class="btn btn-secondary my-2 my-sm-0"
+              type="submit"
+              @click="logout"
+            >
               Logout
             </button>
           </form>
@@ -72,9 +76,17 @@
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue';
+import { useUserStore } from '@/stores/user';
+
 export default defineComponent({
   name: 'TheNavbar',
-  setup() {},
+  setup() {
+    const userStore = useUserStore();
+
+    return {
+      logout: userStore.logoutUser,
+    };
+  },
 });
 </script>
 <style lang=""></style>

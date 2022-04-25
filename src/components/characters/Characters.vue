@@ -33,7 +33,7 @@ export default defineComponent({
     const { characters } = storeToRefs(characterStore);
 
     onMounted(() => {
-      console.log('char', characterStore.getCharacters());
+      // console.log('char', characterStore.getCharacters());
       console.log(characters, 'characters');
       characterStore.getCharacters();
     });
@@ -41,7 +41,7 @@ export default defineComponent({
   },
 });
 </script>
-<style>
+<style scoped>
 .container {
   padding: 1.5em;
   display: inline-grid;
@@ -49,7 +49,7 @@ export default defineComponent({
 }
 
 .spells {
-  color: #c3a2ff;
+  color: #f16acb;
 }
 .card-text {
   margin: 0;
