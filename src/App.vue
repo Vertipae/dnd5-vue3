@@ -2,8 +2,8 @@
 import { RouterLink, RouterView } from 'vue-router';
 </script>
 
-<!-- Pohja
-<template></template>
+<!-- Pohja -->
+<!-- <template></template>
 
 <script lang="ts">
 import { ref, defineComponent } from 'vue';

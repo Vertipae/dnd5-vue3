@@ -24,7 +24,11 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Create Character</a>
+              <router-link to="/createcharacter" class="nav-link"
+                >Create Character</router-link
+              >
+
+              <!-- <a class="nav-link" href="#">Create Character</a> -->
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">Dungeon Master</a>
