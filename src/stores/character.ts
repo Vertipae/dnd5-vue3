@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia';
 import axios, { setToken } from '../utils/axiosService';
+import router from '../router';
 
 export interface Character {
   alignment: string;
@@ -16,8 +17,10 @@ export interface Character {
 
 export const useCharacterStore = defineStore({
   id: 'character',
-  state: (): { characters: Character[] } => ({
+  state: (): { characters: Character[]; classes: any; character: any } => ({
     characters: [],
+    classes: [],
+    character: {},
   }),
   actions: {
     async getCharacters() {
@@ -31,5 +34,34 @@ export const useCharacterStore = defineStore({
         console.log(err);
       }
     },
+    async getClass() {
+      try {
+        const res = await axios.get(
+          'https://vankiloitajalohkuja.herokuapp.com/api/classes',
+        );
+        this.classes = res.data;
+        console.log(res.data, 'classes');
+      } catch (err) {
+        console.log(err);
+      }
+    },
+
+    async addCharacter(characterData: any) {
+      try {
+        const res = await axios.post(
+          'https://vankiloitajalohkuja.herokuapp.com/api/characters',
+          characterData,
+        );
+        this.character = res.data;
+        router.push('/home');
+
+        // console.log(characterData, 'characterData');
+        // console.log(this.character, 'this.character');
+        // console.log(res.data, 'addCharacter');
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    // https://vankiloitajalohkuja.herokuapp.com/api/classes/barbarian/spells
   },
 });

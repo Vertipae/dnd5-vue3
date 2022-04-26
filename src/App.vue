@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router';
+// import TheNavbar from '@/components/TheNavbar.vue';
+// import TheNavbar from ''
 </script>
 
 <!-- Pohja -->
@@ -13,11 +15,12 @@ export default defineComponent({
   setup() {},
 });
 </script>
-<style lang=""></style> -->
+<style scoped></style> -->
 
 <template>
   <header>
     <div class="wrapper">
+      <!-- <TheNavbar v-if="" /> -->
       <!-- <HelloWorld msg="You did it!" /> -->
 
       <!-- <nav>
