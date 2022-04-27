@@ -2,21 +2,8 @@
   <div class="login">
     <form @submit.prevent="onSubmit">
       <fieldset>
-        <legend>Login</legend>
-        <div class="form-group row">
-          <!-- <label for="staticEmail" class="col-sm-2 col-form-label"
-            >Username</label
-          >
-          <div class="col-sm-10">
-            <input
-              type="text"
-              readonly=""
-              class="form-control-plaintext"
-              id="staticEmail"
-              value="email@example.com"
-            />
-          </div> -->
-        </div>
+        <legend class="text">Login</legend>
+        <div class="form-group row"></div>
         <div class="form-group">
           <label for="exampleInputEmail1" class="form-label mt-4"
             >Username</label
@@ -47,6 +34,9 @@
         <button type="submit" class="btn btn-primary">Submit</button>
       </fieldset>
     </form>
+
+    <!-- Oikealle -->
+    <img alt="nopat" src="../assets/nopat.jpg" />
   </div>
 </template>
 <script lang="ts">
@@ -57,8 +47,6 @@ export default defineComponent({
   name: 'Login',
   setup() {
     const userStore = useUserStore();
-
-    // const password = ref('asd');
 
     const onSubmit = () => {
       console.log('click');
@@ -104,10 +92,29 @@ export default defineComponent({
 </script>
 <style>
 .login {
-  max-width: 700px;
+  /* max-width: 700px; */
+  margin-top: 2.5em;
+
+  display: grid;
+  grid-template-rows: 100%;
+  grid-template-columns: 50% 50%;
 }
 
 button {
   margin-top: 0.7em;
+}
+
+img {
+  border-radius: 49px;
+  max-width: 65%;
+  height: auto;
+  margin-left: auto;
+  margin-right: 5em;
+  opacity: 0.8;
+  box-shadow: 10px 10px 5px blueviolet;
+}
+
+.text {
+  text-shadow: 2px 2px blueviolet;
 }
 </style>

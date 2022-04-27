@@ -1,7 +1,14 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router';
-// import TheNavbar from '@/components/TheNavbar.vue';
-// import TheNavbar from ''
+import TheNavbar from '@/components/TheNavbar.vue';
+
+import { storeToRefs } from 'pinia';
+import { useUserStore } from './stores/user';
+import TheWelcome from './components/TheWelcome.vue';
+
+const userStore = useUserStore();
+
+const { player } = storeToRefs(userStore);
 </script>
 
 <!-- Pohja -->
@@ -18,18 +25,24 @@ export default defineComponent({
 <style scoped></style> -->
 
 <template>
-  <header>
-    <div class="wrapper">
-      <!-- <TheNavbar v-if="" /> -->
-      <!-- <HelloWorld msg="You did it!" /> -->
+  <!-- <header> -->
+  <!-- <div class="wrapper"> -->
+  <template v-if="player">
+    <TheNavbar />
+  </template>
+  <template v-else>
+    <TheWelcome />
+  </template>
 
-      <!-- <nav>
+  <!-- <HelloWorld msg="You did it!" /> -->
+
+  <!-- <nav>
         <RouterLink to="/login">Login</RouterLink>
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/about">About</RouterLink>
       </nav> -->
-    </div>
-  </header>
+  <!-- </div> -->
+  <!-- </header> -->
 
   <RouterView />
 </template>

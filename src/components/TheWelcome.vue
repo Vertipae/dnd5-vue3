@@ -1,11 +1,96 @@
-<!-- <template>
-  <TheNavbar></TheNavbar>
-  <Characters></Characters>
-  <h1>HAHMOT</h1>
+<template>
+  <div>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">DnD5</a>
+        <!-- <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarColor02"
+          aria-controls="navbarColor02"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
 
- 
+        <div class="collapse navbar-collapse" id="navbarColor02">
+          <ul class="navbar-nav me-auto">
+            <li class="nav-item">
+              <a class="nav-link active" href="#"
+                >Home
+                <span class="visually-hidden">(current)</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <router-link to="/createcharacter" class="nav-link"
+                >Create Character</router-link
+              > -->
+
+        <!-- <a class="nav-link" href="#">Create Character</a> -->
+        <!-- </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Dungeon Master</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Create Avatar</a>
+            </li> -->
+        <!-- <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                data-bs-toggle="dropdown"
+                href="#"
+                role="button"
+                aria-haspopup="true"
+                aria-expanded="false"
+                >Dropdown</a
+              >
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href="#">Action</a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <a class="dropdown-item" href="#">Something else here</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Separated link</a>
+              </div>
+            </li> -->
+        <!-- /ul>
+          <form class="d-flex"> -->
+        <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">
+          Register
+        </button>
+        <!-- < <input
+              class="form-control me-sm-2"
+              type="text"
+              placeholder="Search"
+            />
+
+            <button
+              class="btn btn-secondary my-2 my-sm-0"
+              type="submit"
+              @click="logout"
+            >
+              Logout
+            </button>
+          </form>
+        </div> -->
+      </div>
+    </nav>
+  </div>
 </template>
-<script setup lang="ts">
-import TheNavbar from './TheNavbar.vue';
-import Characters from './characters/Characters.vue';
-</script> -->
+<script lang="ts">
+import { defineComponent } from 'vue';
+import { useUserStore } from '@/stores/user';
+
+export default defineComponent({
+  name: 'TheWelcome',
+  setup() {
+    const userStore = useUserStore();
+
+    return {
+      logout: userStore.logoutUser,
+    };
+  },
+});
+</script>
+<style lang=""></style>
