@@ -17,10 +17,9 @@ export interface Character {
 
 export const useCharacterStore = defineStore({
   id: 'character',
-  state: (): { characters: Character[]; classes: any; character: any } => ({
+  state: (): { characters: Character[]; classes: any } => ({
     characters: [],
     classes: [],
-    character: {},
   }),
   actions: {
     async getCharacters() {
@@ -52,7 +51,7 @@ export const useCharacterStore = defineStore({
           'https://vankiloitajalohkuja.herokuapp.com/api/characters',
           characterData,
         );
-        this.character = res.data;
+        this.characters.push(res.data);
         router.push('/home');
 
         // console.log(characterData, 'characterData');
@@ -62,6 +61,33 @@ export const useCharacterStore = defineStore({
         console.log(err);
       }
     },
+
+    async updateCharacter(characterData: any, id: string) {
+      try {
+        const res = await axios.put(
+          `https://vankiloitajalohkuja.herokuapp.com/api/characters/${id}`,
+          characterData,
+        );
+        // this.characters = this.characters.map((character: Character) => character._id === res.data._id ? res.data : character);
+        this.characters = this.characters.map((character: Character) => {
+          if (character._id === res.data._id) {
+            return res.data;
+          }
+          return character;
+        });
+        router.push('/home');
+      } catch (err) {
+        console.log(err);
+      }
+    },
     // https://vankiloitajalohkuja.herokuapp.com/api/classes/barbarian/spells
+  },
+  getters: {
+    getCharacterById: (state) => {
+      return (charId: string) =>
+        <Character>(
+          state.characters.find((character) => character._id === charId)
+        );
+    },
   },
 });

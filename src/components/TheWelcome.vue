@@ -2,7 +2,7 @@
   <div>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">DnD5</a>
+        <router-link to="/" class="navbar-brand">DnD5</router-link>
         <!-- <button
           class="navbar-toggler"
           type="button"

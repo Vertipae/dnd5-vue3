@@ -5,18 +5,20 @@
       class="card border-secondary mb-3"
       style="max-width: 20rem"
     >
-      <div class="card-header">
-        Race: {{ character.race }} Class: {{ character.characterClass }}
-      </div>
-      <div class="card-body">
-        <h4 class="card-title">{{ character.name }}</h4>
-        <span v-if="character.spells.length > 0">
-          <span class="spells">Spells:</span>
-          <p v-for="spell in character.spells" class="card-text">
-            {{ spell }}
-          </p>
-        </span>
-      </div>
+      <router-link :to="`/character/${character._id}`">
+        <div class="card-header">
+          Race: {{ character.race }} Class: {{ character.characterClass }}
+        </div>
+        <div class="card-body">
+          <h4 class="card-title">{{ character.name }}</h4>
+          <span v-if="character.spells.length > 0">
+            <span class="spells">Spells:</span>
+            <p v-for="spell in character.spells" class="card-text">
+              {{ spell }}
+            </p>
+          </span>
+        </div>
+      </router-link>
     </div>
   </div>
 </template>

@@ -2,6 +2,7 @@ import LoginViewVue from '@/views/LoginView.vue';
 import { createRouter, createWebHistory } from 'vue-router';
 import HomeView from '../views/HomeView.vue';
 import CreateCharacterView from '@/views/CreateCharacterView.vue';
+import EditCharacterView from '@/views/EditCharacterView.vue';
 import PageNotFound from '@/views/PageNotFoundView.vue';
 
 const router = createRouter({
@@ -33,6 +34,12 @@ const router = createRouter({
       path: '/createcharacter',
       name: 'createcharacter',
       component: CreateCharacterView,
+    },
+
+    {
+      path: '/character/:id',
+      name: 'editcharacter',
+      component: EditCharacterView,
     },
   ],
 });

@@ -2,7 +2,7 @@
   <div>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">DnD5</a>
+        <router-link to="/" class="navbar-brand">DnD5</router-link>
         <button
           class="navbar-toggler"
           type="button"
@@ -18,10 +18,10 @@
         <div class="collapse navbar-collapse" id="navbarColor02">
           <ul class="navbar-nav me-auto">
             <li class="nav-item">
-              <a class="nav-link active" href="#"
+              <router-link to="/home" class="nav-link active"
                 >Home
                 <span class="visually-hidden">(current)</span>
-              </a>
+              </router-link>
             </li>
             <li class="nav-item">
               <router-link to="/createcharacter" class="nav-link"

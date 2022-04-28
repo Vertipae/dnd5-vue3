@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router';
 import TheNavbar from '@/components/TheNavbar.vue';
+import { ref, onMounted, defineComponent } from 'vue';
+import { useCharacterStore } from '@/stores/character';
 
 import { storeToRefs } from 'pinia';
 import { useUserStore } from './stores/user';
@@ -9,6 +11,11 @@ import TheWelcome from './components/TheWelcome.vue';
 const userStore = useUserStore();
 
 const { player } = storeToRefs(userStore);
+const characterStore = useCharacterStore();
+
+onMounted(() => {
+  characterStore.getClass();
+});
 </script>
 
 <!-- Pohja -->
