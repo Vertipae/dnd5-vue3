@@ -80,6 +80,20 @@ export const useCharacterStore = defineStore({
         console.log(err);
       }
     },
+
+    async deleteCharacter(id: string) {
+      try {
+        const res = await axios.delete(
+          `https://vankiloitajalohkuja.herokuapp.com/api/characters/${id}`,
+        );
+        this.characters = this.characters.filter(
+          (character: Character) => character._id !== res.data._id,
+        );
+        router.push('/home');
+      } catch (err) {
+        console.log(err);
+      }
+    },
     // https://vankiloitajalohkuja.herokuapp.com/api/classes/barbarian/spells
   },
   getters: {

@@ -87,7 +87,60 @@
 
       <button type="submit" class="btn btn-outline-secondary">Submit</button>
       <button @click="cancel" class="btn btn-outline-dark">Cancel</button>
+
+      <button
+        class="btn btn-outline-dark"
+        @click="toggleModal"
+        type="button"
+        data-toggle="modal"
+        data-target="#exampleModalCenter"
+      >
+        Delete
+      </button>
     </form>
+    <!-- Modal -->
+    <div
+      class="modal"
+      id="exampleModalCenter"
+      :style="{ display: modalOpen ? 'block' : 'none' }"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Delete Character</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+              @click="toggleModal"
+            >
+              <span aria-hidden="true"></span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>
+              Are you sure you want to delete
+              <span class="deleteText">{{ characterRef.name }}</span
+              >?
+            </p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" @click="deleteChar">
+              Delete
+            </button>
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+              @click="toggleModal"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -131,10 +184,19 @@ export default defineComponent({
       };
       characterStore.updateCharacter(characterData, route.params.id.toString());
     };
+    const modalOpen = ref(false);
 
+    const toggleModal = () => {
+      modalOpen.value = !modalOpen.value;
+    };
     onMounted(() => {
       characterStore.getClass();
     });
+
+    const deleteChar = () => {
+      console.log('delete');
+      characterStore.deleteCharacter(route.params.id.toString());
+    };
 
     return {
       cancel,
@@ -148,8 +210,20 @@ export default defineComponent({
       level,
       alignment,
       characterRef,
+      deleteChar,
+      modalOpen,
+      toggleModal,
     };
   },
 });
 </script>
-<style scoped></style>
+<style scoped>
+.deleteText {
+  color: aqua;
+}
+
+.modal {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding-top: 4em;
+}
+</style>
