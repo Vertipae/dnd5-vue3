@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <form @submit.prevent="onSubmit">
-      <h1>Edit your character {{ characterRef.name }}</h1>
+      <h1>Edit your character {{ characterRef?.name }}</h1>
       <div class="form-group has-success">
         <label class="form-label mt-4" for="inputValid"
           >Character Name <span class="asterisk">*</span></label
@@ -121,7 +121,7 @@
           <div class="modal-body">
             <p>
               Are you sure you want to delete
-              <span class="deleteText">{{ characterRef.name }}</span
+              <span class="deleteText">{{ characterRef?.name }}</span
               >?
             </p>
           </div>
@@ -145,14 +145,14 @@
 </template>
 
 <script lang="ts">
-import { ref, onMounted, defineComponent } from 'vue';
-import { useCharacterStore } from '@/stores/character';
+import { ref, onMounted, defineComponent, type Ref } from 'vue';
+import { useCharacterStore, type Character } from '@/stores/character';
 import { storeToRefs } from 'pinia';
 import router from '../router';
 import { useRoute } from 'vue-router';
 
 export default defineComponent({
-  name: '',
+  name: 'EditCharacterView',
   setup() {
     const route = useRoute();
     const characterStore = useCharacterStore();
@@ -161,16 +161,24 @@ export default defineComponent({
       router.push('/home');
     };
 
-    const character = characterStore.getCharacterById(
-      route.params.id.toString(),
-    );
+    characterStore.$subscribe(() => setChar());
 
-    const name = ref(character.name);
-    const race = ref(character.race);
-    const characterClass = ref(character.characterClass);
-    const level = ref(character.level);
-    const alignment = ref(character.alignment);
-    const characterRef = ref(character);
+    // const race = ref(character.race);
+    // const characterClass = ref(character.characterClass);
+
+    // const name = ref(character.name);
+    // const level = ref(character.level);
+    // const alignment = ref(character.alignment);
+    // const characterRef = ref(character);
+    let character;
+    const race = ref('');
+    const characterClass = ref('');
+
+    const name = ref('');
+    const level = ref(0);
+    const alignment = ref('');
+    let characterRef: Ref<Character | undefined> = ref(undefined);
+
     const onSubmit = () => {
       console.log('click submit');
 
@@ -189,14 +197,28 @@ export default defineComponent({
     const toggleModal = () => {
       modalOpen.value = !modalOpen.value;
     };
-    onMounted(() => {
-      characterStore.getClass();
-    });
 
     const deleteChar = () => {
       console.log('delete');
       characterStore.deleteCharacter(route.params.id.toString());
     };
+
+    const setChar = () => {
+      character = characterStore.getCharacterById(route.params.id.toString());
+      if (!character) return;
+      race.value = character.race;
+      characterClass.value = character.characterClass;
+      name.value = character.name;
+      level.value = character.level;
+      alignment.value = character.alignment;
+      characterRef = ref(character);
+    };
+
+    onMounted(() => {
+      characterStore.getClass();
+      console.log('täällä');
+      setChar();
+    });
 
     return {
       cancel,

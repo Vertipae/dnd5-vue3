@@ -6,7 +6,11 @@ import { useCharacterStore } from '@/stores/character';
 
 import { storeToRefs } from 'pinia';
 import { useUserStore } from './stores/user';
+
 import TheWelcome from './components/TheWelcome.vue';
+import { setToken } from './utils/axiosService';
+import jwt_decode from 'jwt-decode';
+import router from './router';
 
 const userStore = useUserStore();
 
@@ -15,6 +19,18 @@ const characterStore = useCharacterStore();
 
 onMounted(() => {
   characterStore.getClass();
+  characterStore.getCharacters();
+  console.log(localStorage, 'localStorage');
+
+  if (localStorage.accessToken) {
+    setToken(localStorage.accessToken);
+
+    const decoded: any = jwt_decode(localStorage.accessToken);
+    userStore.setCurrentUser(decoded.player);
+  } else {
+    // TODO: Fix this later
+    router.push('/');
+  }
 });
 </script>
 
