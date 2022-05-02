@@ -27,6 +27,12 @@ onMounted(() => {
 
     const decoded: any = jwt_decode(localStorage.accessToken);
     userStore.setCurrentUser(decoded.player);
+
+    const currentTime = Date.now() / 1000;
+    if (decoded.exp < currentTime) {
+      userStore.logoutUser();
+      router.push('/');
+    }
   } else {
     // TODO: Fix this later
     router.push('/');
